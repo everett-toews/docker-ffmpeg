@@ -5,10 +5,29 @@ MAINTAINER Fred Park <https://github.com/alfpark/docker-ffmpeg>
 
 # build ffmpeg
 RUN apk add --update --no-cache \
-        musl coreutils build-base nasm ca-certificates curl tar \
-        openssl-dev zlib-dev yasm-dev lame-dev freetype-dev opus-dev \
-        rtmpdump-dev x264-dev x265-dev xvidcore-dev libass-dev libwebp-dev \
-        libvorbis-dev libogg-dev libtheora-dev libvpx-dev \
+        build-base \
+        ca-certificates \
+        coreutils \
+        curl \
+        freetype-dev \
+        lame-dev \
+        libass-dev \
+        libogg-dev \
+        libtheora-dev \
+        libvorbis-dev \
+        libvpx-dev \
+        libwebp-dev \
+        musl \
+        nasm \
+        openssl-dev \
+        opus-dev \
+        rtmpdump-dev \
+        tar \
+        x264-dev \
+        x265-dev \
+        xvidcore-dev \
+        yasm-dev \
+        zlib-dev \
     && FFMPEG_VER=3.2.1 \
     && curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VER}.tar.gz | tar zxvf - -C . \
     && cd ffmpeg-${FFMPEG_VER} \
@@ -26,8 +45,23 @@ FROM alpine:3.4
 
 COPY --from=build /usr/local/bin/ffmpeg /usr/local/bin/
 
-RUN apk add --no-cache \
-        zlib lame freetype faac opus xvidcore libass libwebp libvorbis libogg \
-        libtheora libvpx rtmpdump-dev x264-dev x265-dev ca-certificates
+RUN apk add --update --no-cache \
+        ca-certificates \
+        faac \
+        freetype \
+        lame \
+        libass \
+        libogg \
+        libtheora \
+        libvorbis \
+        libvpx \
+        libwebp \
+        musl \
+        opus \
+        rtmpdump-dev \
+        x264-dev \
+        x265-dev \
+        xvidcore \
+        zlib
 
 ENTRYPOINT ["ffmpeg"]
